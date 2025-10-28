@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SearchBox() {
@@ -28,14 +29,18 @@ export default function SearchBox() {
         placeholder="Search courses..."
         value={query}
         onChange={handleSearch}
-        className="w-full px-4 py-2 rounded-lg text-black"
+        className="w-full px-4 py-2 rounded-lg text-black bg-white placeholder-gray-500"
       />
       {results.length > 0 && (
-        <div className="absolute bg-white text-black w-full mt-1 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+        <div className="absolute bg-white text-black w-full mt-1 rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
           {results.map((course) => (
-            <div key={course._id} className="p-2 hover:bg-gray-100 cursor-pointer">
+            <Link
+              key={course._id}
+              to={`/course/${course._id}`}
+              className="block p-2 hover:bg-gray-100"
+            >
               {course.title}
-            </div>
+            </Link>
           ))}
         </div>
       )}
